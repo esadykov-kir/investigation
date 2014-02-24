@@ -1,4 +1,4 @@
-/.idea
+.idea/
 *.iml
 
 *.class
@@ -9,4 +9,4 @@
 *.ear
 
 testdb.*
-/testdb.tmp
+testdb.tmp/
