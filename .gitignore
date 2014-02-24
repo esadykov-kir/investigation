@@ -1,6 +1,9 @@
+# IDEA #
 .idea/
 *.iml
+*.iws
 
+# Java #
 *.class
 
 # Package Files #
@@ -8,5 +11,5 @@
 *.war
 *.ear
 
-testdb.*
-testdb.tmp/
+# Tests #
+test*
