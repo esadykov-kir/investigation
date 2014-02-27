@@ -11,6 +11,10 @@
     <modules>
         <module>hibernate-3.6</module>
         <module>liquibase-postgresql-precondition</module>
+        <module>liquibase-3.1</module>
+        <module>liquibase-3.0</module>
+        <module>liquibase-2.0</module>
+        <module>servlet</module>
     </modules>
 
     
