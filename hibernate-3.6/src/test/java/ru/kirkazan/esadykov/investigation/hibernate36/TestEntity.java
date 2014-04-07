@@ -2,7 +2,6 @@ package ru.kirkazan.esadykov.investigation.hibernate36;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**

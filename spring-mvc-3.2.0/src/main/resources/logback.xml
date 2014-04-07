@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="120 seconds">
+
+    <!--todo specify log directory-->
+
+    <property name="log_pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+
+    <property name="log_size" value="10MB"/>
+
+    <property name="log_file_name_pattern_suffix" value=".%d{yyyy-MM-dd}.%i.log"/>
+
+
+    <appender name="server_async" class="ch.qos.logback.classic.AsyncAppender" queueSize="256">
+        <appender class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>../logs/i.server${log_file_name_pattern_suffix}</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>${log_size}</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+            <encoder>
+                <pattern>${log_pattern}</pattern>
+            </encoder>
+        </appender>
+    </appender>
+    <appender name="server" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>../logs/i.server${log_file_name_pattern_suffix}</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>${log_size}</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+            <encoder>
+                <pattern>${log_pattern}</pattern>
+            </encoder>
+    </appender>
+
+
+    <logger name="i.spring" level="debug" additivity="false">
+        <appender-ref ref="server_async"/>
+    </logger>
+</configuration>
