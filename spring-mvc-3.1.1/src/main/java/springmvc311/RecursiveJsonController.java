@@ -2,6 +2,8 @@ package springmvc311;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -9,43 +11,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @since 28.03.14 7:10
  */
 @Controller
-public class RecursiveJsonController
-{
-    @RequestMapping("/recursive-json")
+@RequestMapping("/recursive-json")
+public class RecursiveJsonController {
+
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public RecursiveObject request()
-    {
+    public RecursiveObject request(@RequestParam(required = false) String param) {
         RecursiveObject ro = new RecursiveObject();
+        ro.setSomething(param);
         //ro.setRo(ro);
-
         return ro;
-    }
-
-}
-
-
-class RecursiveObject
-{
-    private RecursiveObject ro;
-    private String something = "ro";
-
-    RecursiveObject getRo()
-    {
-        return ro;
-    }
-
-    void setRo(RecursiveObject ro)
-    {
-        this.ro = ro;
-    }
-
-    String getSomething()
-    {
-        return something;
-    }
-
-    void setSomething(String something)
-    {
-        this.something = something;
     }
 }
