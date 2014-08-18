@@ -11,5 +11,4 @@
 *.war
 *.ear
 
-# Tests #
-test*
+
