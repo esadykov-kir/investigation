@@ -16,7 +16,7 @@ import java.sql.SQLException;
 
 /**
  * @author esadykov
- * @since 31.07.2014 18:47
+ * @since 01.08.2014 18:47
  */
 public class Liquibase32PostgresCheckShow {
     Connection connection;
