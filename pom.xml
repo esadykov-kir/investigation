@@ -20,6 +20,9 @@
         <module>spring-mvc-3.2.0</module>
         <module>scripting</module>
         <module>assembly</module>
+        <module>postgres-vs-smira</module>
+        <module>liquibase-3.2</module>
+        <module>cxf</module>
     </modules>
 
     <dependencyManagement>

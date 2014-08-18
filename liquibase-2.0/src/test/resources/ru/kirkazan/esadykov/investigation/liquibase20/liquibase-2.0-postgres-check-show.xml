@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="fk_by_name" author="ser" dbms="postgresql">
+        <preConditions onFail="CONTINUE">
+            <foreignKeyConstraintExists foreignKeyName="not_exist"/>
+        </preConditions>
+        <sql>
+            select 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="index_by_name" author="ser" dbms="postgresql">
+        <preConditions onFail="CONTINUE">
+            <indexExists indexName="not_exist"/>
+        </preConditions>
+        <sql>
+            select 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="index_by_name_and_table" author="ser" dbms="postgresql">
+        <preConditions onFail="CONTINUE">
+            <indexExists indexName="not_exist" tableName="not_exist"/>
+        </preConditions>
+        <sql>
+            select 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="pk_by_name" author="ser" dbms="postgresql">
+        <preConditions onFail="CONTINUE">
+            <primaryKeyExists primaryKeyName="not_exist"/>
+        </preConditions>
+        <sql>
+            select 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="pk_by_name_and_table" author="ser" dbms="postgresql">
+        <preConditions onFail="CONTINUE">
+            <primaryKeyExists primaryKeyName="not_exist" tableName="not_exist"/>
+        </preConditions>
+        <sql>
+            select 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="seq_by_name" author="ser" dbms="postgresql">
+        <preConditions onFail="CONTINUE">
+            <sequenceExists sequenceName="not_exist"/>
+        </preConditions>
+        <sql>
+            select 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="custom-sample2" author="ser" dbms="postgresql">
+        <customChange class="ru.kirkazan.esadykov.investigation.liquibase20.SampleCustomChange">
+            <param name="param" value="paramValue"/>
+            <param name="param2" value="paramValue2"/>
+            <param name="param3" value="paramValue3"/>
+            <param name="param4" value="paramValue4"/>
+            <param name="param5" value="paramValue5"/>
+        </customChange>
+    </changeSet>
+    <changeSet id="1" author="1">
+        <sqlFile path=""/>
+    </changeSet>
+</databaseChangeLog>
