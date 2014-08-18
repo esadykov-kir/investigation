@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="MyServiceService" targetNamespace="http://server.cxf" xmlns:ns1="http://server.cxf/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://server.cxf"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:types>
+        <xs:schema xmlns:tns="http://server.cxf/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   elementFormDefault="unqualified" targetNamespace="http://server.cxf/" version="1.0">
+
+            <xs:element name="getDate" type="tns:getDate"/>
+
+            <xs:element name="getDateResponse" type="tns:getDateResponse"/>
+
+            <xs:complexType name="getDate">
+                <xs:sequence/>
+            </xs:complexType>
+
+            <xs:complexType name="getDateResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getDateResponse">
+        <wsdl:part name="parameters" element="ns1:getDateResponse">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getDate">
+        <wsdl:part name="parameters" element="ns1:getDate">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="MyService">
+        <wsdl:operation name="getDate">
+            <wsdl:input name="getDate" message="ns1:getDate">
+            </wsdl:input>
+            <wsdl:output name="getDateResponse" message="ns1:getDateResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="MyServiceServiceSoapBinding" type="ns1:MyService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getDate">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getDate">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getDateResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="MyServiceService">
+        <wsdl:port name="MyServicePort" binding="ns1:MyServiceServiceSoapBinding">
+            <soap:address location="http://localhost:9090/MyServicePort"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
