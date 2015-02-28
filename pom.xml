@@ -23,6 +23,8 @@
         <module>postgres-vs-smira</module>
         <module>liquibase-3.2</module>
         <module>cxf</module>
+        <module>mssql</module>
+        <module>mockito</module>
     </modules>
 
     <dependencyManagement>
