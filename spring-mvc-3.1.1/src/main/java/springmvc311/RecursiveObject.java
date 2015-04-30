@@ -2,22 +2,22 @@ package springmvc311;
 
 public class RecursiveObject {
 
-   // private RecursiveObject ro;
+    private RecursiveObject ro;
     private String something = "ro";
 
-  /*  RecursiveObject getRo() {
+    public RecursiveObject getRo() {
         return ro;
     }
 
-    void setRo(RecursiveObject ro) {
+    public void setRo(RecursiveObject ro) {
         this.ro = ro;
-    }*/
+    }
 
-    String getSomething() {
+    public String getSomething() {
         return something;
     }
 
-    void setSomething(String something) {
+    public void setSomething(String something) {
         this.something = something;
     }
 }
