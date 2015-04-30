@@ -10,7 +10,6 @@ import liquibase.exception.Warnings;
 import liquibase.logging.LogFactory;
 import liquibase.logging.Logger;
 import liquibase.precondition.Precondition;
-import liquibase.precondition.PreconditionFactory;
 
 /**
  * @author ser
