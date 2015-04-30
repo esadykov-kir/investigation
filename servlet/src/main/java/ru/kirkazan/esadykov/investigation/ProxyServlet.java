@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author esadykov
  * @since 28.02.14 12:28
  */
-@WebServlet(urlPatterns = "proxy")
+@WebServlet(urlPatterns = "/proxy")
 public class ProxyServlet extends HttpServlet
 {
     @Override
