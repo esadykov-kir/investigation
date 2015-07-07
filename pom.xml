@@ -8,20 +8,21 @@
     <artifactId>investigation</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
+    <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+
     <modules>
         <module>hibernate-3.6</module>
-        <module>liquibase-postgresql-precondition</module>
-        <module>liquibase-3.1</module>
-        <module>liquibase-3.0</module>
         <module>liquibase-2.0</module>
         <module>servlet</module>
         <module>tomcat-pool</module>
-        <module>spring-mvc-3.1.1</module>
-        <module>spring-mvc-3.2.0</module>
+        <module>spring-mvc-3.2</module>
         <module>scripting</module>
         <module>assembly</module>
-        <module>postgres-vs-smira</module>
-        <module>liquibase-3.2</module>
+        <module>liquibase-3.3</module>
         <module>cxf</module>
         <module>mssql</module>
         <module>mockito</module>
