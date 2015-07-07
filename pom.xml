@@ -25,6 +25,7 @@
         <module>cxf</module>
         <module>mssql</module>
         <module>mockito</module>
+        <module>ehcache-cluster</module>
     </modules>
 
     <dependencyManagement>
