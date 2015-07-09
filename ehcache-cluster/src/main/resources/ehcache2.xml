@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="false" monitoring="autodetect"
+         dynamicConfig="true">
+
+
+    <diskStore path="java.io.tmpdir"/>
+
+
+    <transactionManagerLookup class="net.sf.ehcache.transaction.manager.DefaultTransactionManagerLookup"
+                              properties="jndiName=java:/TransactionManager" propertySeparator=";"/>
+
+
+
+    <cacheManagerEventListenerFactory class="" properties=""/>
+
+
+    <cacheManagerPeerProviderFactory
+            class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+            properties="peerDiscovery=automatic,
+
+                        multicastGroupAddress=230.0.1.1,
+                        multicastGroupPort=4446, timeToLive=0"
+            propertySeparator=","
+            />
+
+    <cacheManagerPeerListenerFactory
+            class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+            properties="socketTimeoutMillis=2000"
+            />
+
+
+    <defaultCache
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="600"
+            timeToLiveSeconds="600"
+            overflowToDisk="false"
+            diskSpoolBufferSizeMB="30"
+            maxElementsOnDisk="10000000"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU"
+            statistics="false"
+            />
+
+    <!--
+    Sample caches. Following are some example caches. Remove these before use.
+    -->
+
+
+
+    <cache name="cache"
+           maxElementsInMemory="1000"
+           eternal="false"
+           timeToIdleSeconds="60"
+           timeToLiveSeconds="60"
+           overflowToDisk="false">
+
+        <cacheEventListenerFactory
+                class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+                properties="replicateAsynchronously=false, replicatePuts=true, replicateUpdates=true,
+replicateUpdatesViaCopy=false, replicateRemovals=true "/>
+    </cache>
+
+</ehcache>

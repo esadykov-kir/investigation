@@ -26,6 +26,7 @@
         <module>cxf</module>
         <module>mssql</module>
         <module>mockito</module>
+        <module>ehcache-cluster</module>
         <module>artifactory-client-utils</module>
     </modules>
 
