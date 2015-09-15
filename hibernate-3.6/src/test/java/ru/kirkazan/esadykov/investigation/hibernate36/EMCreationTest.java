@@ -59,4 +59,57 @@ public class EMCreationTest {
         manager.getTransaction().commit();
 
     }
+
+
+    @Test
+    public void testCache() {
+
+        EntityManager manager = factory.createEntityManager();
+        manager.getTransaction().begin();
+
+        logger.debug("--persist");
+        TestEntity teSource = new TestEntity(1);
+        manager.persist(teSource);
+        manager.flush();
+
+        logger.debug("--find exists in same manager");
+        TestEntity teTarget = manager.find(TestEntity.class, teSource.getId());
+        Assert.assertEquals(teSource.getId(), teTarget.getId());
+
+
+        logger.debug("--find exists in same manager");
+        teTarget = manager.find(TestEntity.class, teSource.getId());
+        Assert.assertEquals(teSource.getId(), teTarget.getId());
+
+        logger.debug("--find exists in same manager");
+        teTarget = manager.find(TestEntity.class, teSource.getId());
+        Assert.assertEquals(teSource.getId(), teTarget.getId());
+
+        manager.getTransaction().commit();
+        manager.close();
+
+        EntityManager anotherManager = factory.createEntityManager();
+        anotherManager.getTransaction().begin();
+
+        logger.debug("--find exists");
+        teTarget = anotherManager.find(TestEntity.class, teSource.getId());
+        Assert.assertEquals(teSource.getId(), teTarget.getId());
+
+        logger.debug("--find exists again");
+        teTarget = anotherManager.find(TestEntity.class, teSource.getId());
+        Assert.assertEquals(teSource.getId(), teTarget.getId());
+
+        logger.debug("--find exists again");
+        teTarget = anotherManager.find(TestEntity.class, teSource.getId());
+        Assert.assertEquals(teSource.getId(), teTarget.getId());
+
+        logger.debug("--find not exists");
+        Assert.assertNull(anotherManager.find(TestEntity.class, 2));
+
+        logger.debug("--find not exists");
+        Assert.assertNull(anotherManager.find(TestEntity.class, 2));
+
+        anotherManager.getTransaction().commit();
+        anotherManager.close();
+    }
 }

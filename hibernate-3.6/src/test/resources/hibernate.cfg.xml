@@ -8,8 +8,10 @@
         <property name="hibernate.connection.username">testdb</property>
         <property name="hibernate.connection.password">testdb</property>
 
-        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <property name="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.SingletonEhCacheRegionFactory</property>
 
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <mapping class="ru.kirkazan.esadykov.investigation.hibernate36.TestEntity"/>
     </session-factory>
 
