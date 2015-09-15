@@ -8,12 +8,14 @@
     <diskStore path="java.io.tmpdir"/>
 
 
+<!--
     <transactionManagerLookup class="net.sf.ehcache.transaction.manager.DefaultTransactionManagerLookup"
                               properties="jndiName=java:/TransactionManager" propertySeparator=";"/>
 
 
 
     <cacheManagerEventListenerFactory class="" properties=""/>
+-->
 
 
     <cacheManagerPeerProviderFactory
@@ -31,23 +33,23 @@
 
 
     <defaultCache
-            maxElementsInMemory="10000"
+            maxElementsInMemory="100000"
             eternal="false"
             timeToIdleSeconds="600"
             timeToLiveSeconds="600"
             overflowToDisk="false"
-            diskSpoolBufferSizeMB="30"
-            maxElementsOnDisk="10000000"
-            diskPersistent="false"
-            diskExpiryThreadIntervalSeconds="120"
             memoryStoreEvictionPolicy="LRU"
             statistics="false"
-            />
+            >
+        <cacheEventListenerFactory
+                class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+                properties="replicateAsynchronously=true"/>
+
+    </defaultCache>
 
     <!--
     Sample caches. Following are some example caches. Remove these before use.
     -->
-
 
 
     <cache name="cache"
@@ -56,11 +58,10 @@
            timeToIdleSeconds="60"
            timeToLiveSeconds="60"
            overflowToDisk="false">
-
         <cacheEventListenerFactory
                 class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-                properties="replicateAsynchronously=false, replicatePuts=true, replicateUpdates=true,
-replicateUpdatesViaCopy=false, replicateRemovals=true "/>
+                properties="replicateAsynchronously=true"/>
+
     </cache>
 
 </ehcache>

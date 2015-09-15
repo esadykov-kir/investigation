@@ -20,7 +20,8 @@ public class App {
 
     public static void main(String[] args) {
 
-        CacheManager cacheManager = new CacheManager(ClassLoader.getSystemResourceAsStream("ehcache" + args[0] + ".xml"));
+        CacheManager cacheManager = new CacheManager(ClassLoader.getSystemResourceAsStream("ehcache1.xml"));
+//        CacheManager cacheManager = new CacheManager(ClassLoader.getSystemResourceAsStream("ehcache" + args[0] + ".xml"));
 
         cache = cacheManager.getCache("cache");
 
@@ -42,6 +43,7 @@ public class App {
     }
 
     private static void updateCache(String key) {
+//        cache.put(new Element(key, new Object()));
         cache.put(new Element(key, new Date().toString()));
     }
 
