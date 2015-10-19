@@ -28,6 +28,8 @@
         <module>mockito</module>
         <module>ehcache-cluster</module>
         <module>artifactory-client-utils</module>
+        <module>trash</module>
+        <module>kettle</module>
     </modules>
 
     <dependencyManagement>
