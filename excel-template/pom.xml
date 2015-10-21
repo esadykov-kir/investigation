@@ -27,6 +27,7 @@
     </repositories>
 
     <dependencies>
+        <!--kettle-->
         <dependency>
             <groupId>pentaho-kettle</groupId>
             <artifactId>kettle-core</artifactId>
@@ -55,6 +56,23 @@
             <version>1.1.1</version>
             <scope>runtime</scope>
         </dependency>
+        <!--/kettle-->
+
+        <!--jxls-->
+        <dependency>
+            <groupId>org.jxls</groupId>
+            <artifactId>jxls</artifactId>
+            <version>2.2.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jxls</groupId>
+            <artifactId>jxls-poi</artifactId>
+            <version>1.0.5</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!--/jxls-->
+
     </dependencies>
 
 </project>
