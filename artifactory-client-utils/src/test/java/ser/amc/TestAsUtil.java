@@ -1,7 +1,6 @@
 package ser.amc;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Realm;
@@ -10,12 +9,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 /**
@@ -55,45 +52,10 @@ public class TestAsUtil {
             }
             logger.info("Try to deleted paths: {}", uris.size());
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    @Test
-    public void tree() {
-        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-        AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.prepareGet("http://maven.i-novus.ru/api/storage/libs-release-local");
-
-        requestBuilder.setRealm(REALM);
-        Future<Response> f = requestBuilder.execute();
-        try {
-            Response r = f.get();
-            JsonParser parser = new JsonParser();
-            JsonElement response = parser.parse(new InputStreamReader(r.getResponseBodyAsStream()));
-
-            Folder root = new Folder("libs-release-local");
-
-            Iterator<JsonElement> children = response.getAsJsonObject().get("children").getAsJsonArray().iterator();
-            while (children.hasNext()) {
-                JsonObject item = children.next();
-
-            }
-            logger.info("root children: {}", response.toString());
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     @Test
     public void deleteItem() {
@@ -101,11 +63,7 @@ public class TestAsUtil {
         try {
             Future<Response> f = asyncHttpClient.prepareDelete("http://maven.i-novus.ru/libs-snapshot-local/price-md-mes/price-md-mes/1.0.52-SNAPSHOT").setRealm(REALM).execute();
             logger.debug(f.get().getResponseBody());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
