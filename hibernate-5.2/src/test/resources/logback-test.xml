@@ -19,7 +19,7 @@
         <appender-ref ref="STDOUT" />
     </root>
     <logger name="org.hibernate" level="warn"/>
-    <logger name="org.hibernate.SQL" level="info" />
+    <logger name="org.hibernate.SQL" level="debug" />
     <logger name="net.sf.ehcache" level="debug"/>
 
 </configuration>

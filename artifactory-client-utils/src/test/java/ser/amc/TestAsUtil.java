@@ -3,6 +3,7 @@ package ser.amc;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.AsyncHttpClientConfig;
 import com.ning.http.client.Realm;
 import com.ning.http.client.Response;
 import org.junit.Test;
@@ -22,15 +23,23 @@ import java.util.concurrent.Future;
 public class TestAsUtil {
     private static final Logger logger = LoggerFactory.getLogger("util");
 
-    private static final Realm REALM = new Realm.RealmBuilder().setScheme(Realm.AuthScheme.BASIC).setPassword("APSiakq8KfKkSXfisbeDnSYgUu").setPrincipal("esadykov").build();
+    private static final Realm REALM = new Realm.RealmBuilder().setScheme(Realm.AuthScheme.BASIC)
+            .setPassword("APSiakq8KfKkSXfisbeDnSYgUu").setPrincipal("esadykov")
+            .setUsePreemptiveAuth(true).build();
 
     @Test
     public void searchByVersions() {
-        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-        AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.prepareGet("http://maven.i-novus.ru/api/search/gavc?v=1.0.58-SNAPSHOT");
+        AsyncHttpClientConfig.Builder conf = new AsyncHttpClientConfig.Builder();
+        conf.setRealm(REALM);
+        AsyncHttpClient asyncHttpClient = new AsyncHttpClient(conf.build());
 
-        requestBuilder.setRealm(REALM);
+//        AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.prepareGet("http://maven.i-novus.ru/api/search/gavc?v=1.0-SNAPSHOT.komi.*");
+        AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.prepareGet("http://maven.i-novus.ru/api/search/gavc?v=1.0.66-SNAPSHOT");
+//        AsyncHttpClient.BoundRequestBuilder requestBuilder = asyncHttpClient.prepareGet("http://maven.i-novus.ru/api/search/gavc?a=backend-bundle");
+
         Future<Response> f = requestBuilder.execute();
+
+
         try {
             Response r = f.get();
             JsonParser parser = new JsonParser();
@@ -44,9 +53,8 @@ public class TestAsUtil {
                 uri = uri.replace("/api/storage", "");
                 uri = uri.substring(0, uri.lastIndexOf('/'));
                 if (uris.add(uri)) {
-                    logger.debug(uri);
                     Future<Response> deleteResponse = asyncHttpClient.prepareDelete(uri).setRealm(REALM).execute();
-                    logger.debug(deleteResponse.get().getResponseBody());
+                    logger.debug(uri + ": " + deleteResponse.get().getStatusText());
                 }
 
             }

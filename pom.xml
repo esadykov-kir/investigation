@@ -16,6 +16,7 @@
 
     <modules>
         <module>hibernate-3.6</module>
+        <module>hibernate-5.2</module>
         <module>liquibase-2.0</module>
         <module>servlet</module>
         <module>tomcat-pool</module>
@@ -30,6 +31,8 @@
         <module>artifactory-client-utils</module>
         <module>trash</module>
         <module>excel-template</module>
+        <module>spring-cache-hazlecast</module>
+        <module>request-bin</module>
     </modules>
 
     <dependencyManagement>
@@ -42,6 +45,18 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
     
 </project>

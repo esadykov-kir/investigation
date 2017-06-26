@@ -1,10 +1,9 @@
-package ru.kirkazan.esadykov.investigation.hibernate36;
+package ru.kirkazan.esadykov.investigation.hibernate52;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import com.fasterxml.uuid.Generators;
+import com.fasterxml.uuid.impl.TimeBasedGenerator;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 import java.util.UUID;
 
 /**
@@ -12,12 +11,11 @@ import java.util.UUID;
  * @since 19.02.14 22:44
  */
 @Entity
-@Table(name = "version")
-//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-//@Cacheable
-public class TestEntity {
+@Table(name = "version_uuid_rnd")
+public class TestUUIDRandomEntity {
+
     @Id
-    @Column( columnDefinition = "UUID not null primary key")
+    @Column(columnDefinition = "UUID not null")
     private UUID id;
 
     @Column(columnDefinition = "UUID not null" )
@@ -25,18 +23,11 @@ public class TestEntity {
 
     @Column
     private String value;
-    public TestEntity() {
+
+    public TestUUIDRandomEntity() {
     }
 
-    @PrePersist
-    private void prePersist() {
-        if (id == null)
-            id = UUID.randomUUID();
-        if (entityId == null)
-            entityId = id;
-    }
-
-    public TestEntity(UUID id) {
+    public TestUUIDRandomEntity(UUID id) {
         this.id = id;
     }
 
@@ -56,7 +47,6 @@ public class TestEntity {
         this.value = value;
     }
 
-
     public UUID getEntityId() {
         return entityId;
     }
@@ -65,9 +55,19 @@ public class TestEntity {
         this.entityId = entityId;
     }
 
+    @PrePersist
+    private void prePersist() {
+        if (id == null) {
+            id = UUID.randomUUID();
+        }
+        if (entityId == null)
+            entityId = id;
+    }
+
+
     @Override
     public String toString() {
-        return "TestEntity{" +
+        return "Test2Entity{" +
                 "id=" + id +
                 ", value='" + value + '\'' +
                 '}';

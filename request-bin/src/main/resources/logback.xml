@@ -7,22 +7,13 @@
         </encoder>
     </appender>
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>ehcache.log</file>
+        <file>/temp/request-bin.log</file>
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
     <root level="debug">
-        <appender-ref ref="CONSOLE"/>
-    </root>
-
-    <logger name="net.sf.ehcache" level="debug" additivity="false">
         <appender-ref ref="FILE"/>
-    </logger>
-
-    <logger name="s.e.r" level="debug" additivity="false">
-        <appender-ref ref="CONSOLE"/>
-    </logger>
-
+    </root>
 </configuration>

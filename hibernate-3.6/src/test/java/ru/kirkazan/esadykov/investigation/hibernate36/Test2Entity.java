@@ -1,6 +1,10 @@
-package ru.kirkazan.esadykov.investigation.hibernate52;
+package ru.kirkazan.esadykov.investigation.hibernate36;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**

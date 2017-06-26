@@ -1,89 +1,54 @@
 package ru.kirkazan.esadykov.investigation.hibernate52;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author ser
  * @since 19.02.14 22:44
  */
 @Entity
-@Table(name = "version")
-//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-//@Cacheable
+@Table(name = "version_long")
 public class TestEntity {
-/*
-    @Id
-    @Column( columnDefinition = "UUID not null")
-    private UUID id;
 
-    @Column(columnDefinition = "UUID not null" )
-    private UUID entityId;
-*/
     @Id
-    private Integer id;
+    @Column(columnDefinition = "BIGINT not null")
+    private Long id;
 
-    private Integer entityId;
+    @Column(columnDefinition = "BIGINT not null")
+    private Long entityId;
 
     @Column
     private String value;
     public TestEntity() {
     }
 
-//    static TimeBasedGenerator timeBasedGenerator = Generators.timeBasedGenerator();
-    public static int seq = 1;
+    public static long seq = 1;
+    @PrePersist
     private void prePersist() {
         if (id == null) {
             id = seq++;
-//            id = Generators.timeBasedGenerator().generate();
-//            id = UUID.randomUUID();
         }
         if (entityId == null)
             entityId = id;
     }
 
-/*
-    public TestEntity(UUID id) {
+    public TestEntity(Long id) {
         this.id = id;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-        public UUID getEntityId() {
+    public Long getEntityId() {
         return entityId;
     }
 
-    public void setEntityId(UUID entityId) {
-        this.entityId = entityId;
-    }
-
-*/
-
-    public TestEntity(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getEntityId() {
-        return entityId;
-    }
-
-    public void setEntityId(Integer entityId) {
+    public void setEntityId(Long entityId) {
         this.entityId = entityId;
     }
 

@@ -1,8 +1,6 @@
 package ru.kirkazan.esadykov.investigation.hibernate52;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,34 +8,42 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.sql.*;
-import java.util.Properties;
 
 /**
  * @author ser
  * @since 20.02.14 0:33
  */
+@FixMethodOrder
 public class EMCreationTest {
-    private Logger logger = LoggerFactory.getLogger(EMCreationTest.class);
+    public static final int ITERATIONS = 100;
+    private static Logger logger = LoggerFactory.getLogger(EMCreationTest.class);
 
     EntityManagerFactory factory;
     EntityManager manager;
-    Driver driver;
 
-    @Before
-    public void init() {
-        factory = Persistence.createEntityManagerFactory("ru.kirkazan.esadykov.investigation.hibernate52");
-        manager = factory.createEntityManager();
+    @BeforeClass
+    public static void cleanupBefore() throws SQLException {
+        Connection connection = getConnection();
+        Statement stat = connection.createStatement();
+        stat.executeUpdate("truncate version_long");
+        stat.executeUpdate("truncate version_uuid_rnd");
+        stat.executeUpdate("truncate version_uuid_seq");
+        stat.executeUpdate("truncate version_varchar_rnd");
+        stat.executeUpdate("truncate version_varchar_seq");
+
+        stat.execute("select pg_stat_statements_reset()");
     }
 
-    private Connection getConnection() {
-        driver = new org.postgresql.Driver();
-        Properties props = new Properties();
-        props.put("username", "postgres");
-        props.put("password", "postgres");
+    @Before
+    public void init() throws SQLException {
+        factory = Persistence.createEntityManagerFactory("ru.kirkazan.esadykov.investigation.hibernate52");
+        manager = factory.createEntityManager();
 
+    }
+
+    private static Connection getConnection() {
         try {
             return DriverManager.getConnection("jdbc:postgresql://localhost:54946/postgres", "postgres", "postgres");
-            //return driver.connect("jdbc:postgresql://localhost:54946/postgres", props);
         } catch (SQLException e) {
             logger.error("Connection error", e);
         }
@@ -60,41 +66,91 @@ public class EMCreationTest {
 
     @Test
     public void testVersions() {
-        for (int i = 0; i < 1000; i++) {
-            manager.getTransaction().begin();
-
-            TestEntity entity = new TestEntity();
-            entity.setId(i);
-            entity.setEntityId(i);
-            entity.setValue("1");
-            manager.persist(entity);
-            entity = manager.find(TestEntity.class, entity.getId());
-            logger.info("entity version id={}, entityId={}", entity.getId(), entity.getEntityId());
-
-            manager.getTransaction().commit();
-        }
         logger.info("Start...");
         long startAt = System.currentTimeMillis();
-        for (int i = 1001; i < 51001; i++) {
+        for (int i = 1; i <= ITERATIONS; i++) {
             manager.getTransaction().begin();
 
             TestEntity entity = new TestEntity();
-            entity.setId(i);
-            entity.setEntityId(i);
             entity.setValue("1");
             manager.persist(entity);
-//            entity = manager.find(TestEntity.class, entity.getId());
-//            logger.info("entity version id={}, entityId={}", entity.getId(), entity.getEntityId());
 
             manager.getTransaction().commit();
+            manager.clear();
         }
         logger.info("..finish. It takes {} ms", System.currentTimeMillis() - startAt);
-
-
     }
 
 
     @Test
+    public void testVersionsUUIDRandom() {
+        logger.info("Start...");
+        long startAt = System.currentTimeMillis();
+        for (int i = 1; i <= ITERATIONS; i++) {
+            manager.getTransaction().begin();
+
+            TestUUIDRandomEntity entity = new TestUUIDRandomEntity();
+            entity.setValue("1");
+            manager.persist(entity);
+
+            manager.getTransaction().commit();
+            manager.clear();
+        }
+        logger.info("..finish. It takes {} ms", System.currentTimeMillis() - startAt);
+    }
+
+    @Test
+    public void testVersionsUUIDSeq() {
+        logger.info("Start...");
+        long startAt = System.currentTimeMillis();
+        for (int i = 1; i <= ITERATIONS; i++) {
+            manager.getTransaction().begin();
+
+            TestUUIDSeqEntity entity = new TestUUIDSeqEntity();
+            entity.setValue("1");
+            manager.persist(entity);
+
+            manager.getTransaction().commit();
+            manager.clear();
+        }
+        logger.info("..finish. It takes {} ms", System.currentTimeMillis() - startAt);
+    }
+
+    @Test
+    public void testVersionsVarCharRnd() {
+        logger.info("Start...");
+        long startAt = System.currentTimeMillis();
+        for (int i = 1; i <= ITERATIONS; i++) {
+            manager.getTransaction().begin();
+
+            TestVarCharRandomEntity entity = new TestVarCharRandomEntity();
+            entity.setValue("1");
+            manager.persist(entity);
+
+            manager.getTransaction().commit();
+            manager.clear();
+        }
+        logger.info("..finish. It takes {} ms", System.currentTimeMillis() - startAt);
+    }
+
+    @Test
+    public void testVersionsVarCharSeq() {
+        logger.info("Start...");
+        long startAt = System.currentTimeMillis();
+        for (int i = 1; i <= ITERATIONS; i++) {
+            manager.getTransaction().begin();
+
+            TestVarCharSeqEntity entity = new TestVarCharSeqEntity();
+            entity.setValue("1");
+            manager.persist(entity);
+
+            manager.getTransaction().commit();
+            manager.clear();
+        }
+        logger.info("..finish. It takes {} ms", System.currentTimeMillis() - startAt);
+    }
+
+
     public void testVersionsNoHiber() throws SQLException {
         Connection connection = getConnection();
         connection.setAutoCommit(false);

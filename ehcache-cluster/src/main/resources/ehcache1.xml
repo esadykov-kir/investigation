@@ -34,16 +34,14 @@
 
     <defaultCache
             maxElementsInMemory="100000"
-            eternal="false"
-            timeToIdleSeconds="600"
-            timeToLiveSeconds="600"
+            eternal="true"
+            timeToIdleSeconds="60"
+            timeToLiveSeconds="60"
             overflowToDisk="false"
-            memoryStoreEvictionPolicy="LRU"
-            statistics="false"
             >
         <cacheEventListenerFactory
                 class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-                properties="replicateAsynchronously=true"/>
+                properties="replicateAsynchronously=true, replicateUpdatesViaCopy=false"/>
 
     </defaultCache>
 
@@ -52,6 +50,7 @@
     -->
 
 
+<!--
     <cache name="cache"
            maxElementsInMemory="1000"
            eternal="false"
@@ -63,5 +62,6 @@
                 properties="replicateAsynchronously=true"/>
 
     </cache>
+-->
 
 </ehcache>

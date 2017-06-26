@@ -13,6 +13,7 @@
         </sql>
     </changeSet>
 
+    <includeAll path="/" relativeToChangelogFile=""/>
     <changeSet id="index_by_name" author="ser" dbms="postgresql">
         <preConditions onFail="CONTINUE">
             <indexExists indexName="not_exist"/>

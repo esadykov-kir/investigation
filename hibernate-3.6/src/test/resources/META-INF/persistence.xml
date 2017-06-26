@@ -4,14 +4,15 @@
              version="2.0">
     <persistence-unit name="ru.kirkazan.esadykov.investigation.hibernate36">
         <properties>
-            <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbc.JDBCDriver"/>
-            <property name="hibernate.connection.url" value="jdbc:hsqldb:file:testdb"/>
-            <property name="hibernate.connection.username" value="testdb"/>
-            <property name="hibernate.connection.password" value="testdb"/>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:54946/postgres"/>
+            <property name="hibernate.connection.username" value="postgres"/>
+            <property name="hibernate.connection.password" value="postgres"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 
 
-            <property name="hibernate.cache.use_second_level_cache" value="true"/>
+            <property name="hibernate.cache.use_second_level_cache" value="false"/>
             <property name="hibernate.cache.region.factory_class" value="net.sf.ehcache.hibernate.SingletonEhCacheRegionFactory"/>
         </properties>
     </persistence-unit>
