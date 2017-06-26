@@ -8,8 +8,8 @@
     
     <packaging>pom</packaging>
     <parent>
-    	<groupId>ru.kirkazan.esadykov.investigation</groupId>
-    	<artifactId>investigation</artifactId>
+    	<groupId>ser.i</groupId>
+    	<artifactId>parent</artifactId>
     	<version>1.0-SNAPSHOT</version>
     </parent>
 

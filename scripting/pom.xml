@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>investigation</artifactId>
-        <groupId>ru.kirkazan.esadykov.investigation</groupId>
+        <artifactId>parent</artifactId>
+        <groupId>ser.i</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 

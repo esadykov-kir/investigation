@@ -6,7 +6,7 @@
 
     <parent>
         <artifactId>assembly</artifactId>
-        <groupId>ru.kirkazan.esadykov.investigation</groupId>
+        <groupId>ser.i</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 

@@ -6,7 +6,7 @@
 
     <parent>
         <artifactId>assembly</artifactId>
-        <groupId>ru.kirkazan.esadykov.investigation</groupId>
+        <groupId>ser.i</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
@@ -14,7 +14,7 @@
 
     <dependencies>
         <dependency>
- 			<groupId>ru.kirkazan.esadykov.investigation</groupId>
+ 			<groupId>ser.i</groupId>
             <artifactId>assembly-dep11</artifactId>
             <version>${project.version}</version>
         </dependency>
