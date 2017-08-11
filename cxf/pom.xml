@@ -16,6 +16,7 @@
         <module>server</module>
         <module>server-api</module>
         <module>client</module>
+        <module>cxf-war</module>
     </modules>
 
 
