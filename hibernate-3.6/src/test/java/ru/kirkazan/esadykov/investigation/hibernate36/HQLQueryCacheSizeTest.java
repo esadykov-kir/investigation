@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.UUID;
+
 /**
  * @author ser
  * @since 19.02.14 22:27
@@ -44,7 +46,7 @@ public class HQLQueryCacheSizeTest {
 
     @Test
     public void testCacheSize() {
-        TestEntity teSource = new TestEntity(1);
+        TestEntity teSource = new TestEntity(UUID.randomUUID());
         session.persist(teSource);
         TestEntity teTarget = (TestEntity) session.get(TestEntity.class, teSource.getId());
         Assert.assertEquals(teSource.getId(), teTarget.getId());
