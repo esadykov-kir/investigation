@@ -33,6 +33,8 @@
         <module>excel-template</module>
         <module>spring-cache-hazlecast</module>
         <module>request-bin</module>
+        <module>mvc-resources</module>
+        <module>spring-security-saml-keycloak</module>
     </modules>
 
     <dependencyManagement>
